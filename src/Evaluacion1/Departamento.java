@@ -1,9 +1,10 @@
 package Evaluacion1;
 
-public class Departamento extends Vivienda {
+public class Departamento extends Vivienda implements ConEstacionamiento {
 
     private int numeroPiso;
     private boolean gastoComunAlDia;
+    private boolean estacionamientoAsignado = false;
 
     public Departamento(String codigoPropiedad, double superficieM2,
                         int numeroHabitaciones, int numeroPiso,
@@ -32,6 +33,7 @@ public class Departamento extends Vivienda {
 
     @Override
     public double calcularCostoArriendo() {
+
         double costo = 180000;
 
         if (gastoComunAlDia == false) {
@@ -39,6 +41,16 @@ public class Departamento extends Vivienda {
         }
 
         return costo;
+    }
+
+    @Override
+    public boolean tieneEstacionamientoAsignado() {
+        return estacionamientoAsignado;
+    }
+
+    @Override
+    public void asignarEstacionamiento() {
+        estacionamientoAsignado = true;
     }
 
     @Override
