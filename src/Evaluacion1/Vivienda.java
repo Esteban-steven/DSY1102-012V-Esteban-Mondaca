@@ -1,6 +1,6 @@
 package Evaluacion1;
 
-public class Vivienda {
+public abstract class Vivienda {
 
     private String codigoPropiedad;
     private double superficieM2;
@@ -43,6 +43,18 @@ public class Vivienda {
             throw new IllegalArgumentException("Numero de habitaciones incorrecto");
         }
         this.numeroHabitaciones = numeroHabitaciones;
+    }
+
+    public abstract double calcularCostoArriendo();
+
+    public double calcularCostoArriendo(double porcentajeDescuento) {
+
+        if (porcentajeDescuento < 0 || porcentajeDescuento > 100) {
+            throw new IllegalArgumentException("Descuento incorrecto");
+        }
+
+        double costo = calcularCostoArriendo();
+        return costo - (costo * porcentajeDescuento / 100);
     }
 
     @Override
