@@ -6,24 +6,50 @@ public class Main {
 
         GestorViviendas gestor = new GestorViviendas();
 
-        Casa casa = new Casa("C001", 100, 3, true);
-
-        Departamento departamento = new Departamento(
-                "D001", 60, 2, 5, true
+        Departamento departamento1 = new Departamento(
+                "PROP-D01", 65, 3, 8, false
         );
 
-        gestor.registrarVivienda(casa);
-        gestor.registrarVivienda(departamento);
+        Departamento departamento2 = new Departamento(
+                "PROP-D02", 48, 2, 3, true
+        );
 
-        for (Vivienda vivienda : gestor.getViviendas()) {
+        Casa casa1 = new Casa(
+                "PROP-C01", 120, 4, true
+        );
 
-            System.out.println(vivienda);
-            System.out.println("Costo arriendo: " + vivienda.calcularCostoArriendo());
-        }
+        Casa casa2 = new Casa(
+                "PROP-C02", 90, 3, false
+        );
+
+        departamento1.asignarEstacionamiento();
+
+        gestor.registrarVivienda(departamento1);
+        gestor.registrarVivienda(departamento2);
+        gestor.registrarVivienda(casa1);
+        gestor.registrarVivienda(casa2);
 
         System.out.println("Busqueda:");
 
-        for (Vivienda vivienda : gestor.buscarPorCodigo("D001")) {
+        for (Vivienda vivienda : gestor.buscarPorCodigo("PROP-D01")) {
+
+            System.out.println(vivienda);
+
+            if (vivienda instanceof Departamento) {
+                Departamento departamento = (Departamento) vivienda;
+
+                System.out.println("Tipo: Departamento");
+                System.out.println("Piso: " + departamento.getNumeroPiso());
+                System.out.println("Gasto comun al dia: " + departamento.isGastoComunAlDia());
+                System.out.println("Estacionamiento: " + departamento.tieneEstacionamientoAsignado());
+            }
+
+            System.out.println("Costo arriendo: " + vivienda.calcularCostoArriendo());
+        }
+
+        System.out.println("Listado:");
+
+        for (Vivienda vivienda : gestor.getViviendas()) {
             System.out.println(vivienda);
         }
     }
